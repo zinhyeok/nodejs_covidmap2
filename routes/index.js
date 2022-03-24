@@ -30,6 +30,21 @@ router.post("/location", (req,res,next)=>{
       message: "post error",
     });
   });
-
 });
+//.find{} 안에 찾고 싶은 정보 입력
+router.get('/location', (req, res, next) => {
+  locationModel.find({}, { _id: 0, _v: 0 }).then((result) => {
+    console.log(result);
+    res.json({
+      message: "success",
+      data: result,
+    });
+  }).catch((error) => {
+    res.json({
+      message: "error",
+    });
+  });  
+})
+
+
 module.exports = router;

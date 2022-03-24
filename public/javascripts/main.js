@@ -1,27 +1,18 @@
-var mapOptions = {
+const mapOptions = {
     center: new naver.maps.LatLng(37.3595704, 127.105399),
     zoom: 10,
   };
 
-var map = new naver.maps.Map("map", mapOptions);
+const map = new naver.maps.Map("map", mapOptions);
 
-const data = [
-  {
-    title: "용산역",
-    address: "용산",
-    lat:37.52995115069976, 
-    lng:126.96479627575842,
-  },
+$.ajax({
+  url: "/location",
+  type: "GET",
+}).done((response) => {
+  if (response.message !== "success") return;
+  const data = response.data;
 
-  {
-    title: "서울역",
-    address: "서울",
-    lat:37.55619031742226, 
-    lng: 126.9724214141688,
-  }
-]
-
-let markerList = [];
+  let markerList = [];
 let infowindowList = [];
 
 const getClickHandler = (i) => () => {
@@ -74,3 +65,6 @@ for (let i=0, ii = markerList.length; i<ii; i++){
   naver.maps.Event.addListener(markerList[i],"click",getClickHandler(i));
   naver.maps.Event.addListener(map,"click",getClicKMap(i));
 }
+});
+
+
