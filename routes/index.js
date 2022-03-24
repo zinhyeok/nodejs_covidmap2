@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
 });
 /* GET upload page. */
 router.get('/upload', (req, res, next) => {
-  console.log("upload");
+  res.render('upload');
 });
 
 router.post("/location", (req,res,next)=>{
