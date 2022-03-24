@@ -65,6 +65,33 @@ for (let i=0, ii = markerList.length; i<ii; i++){
   naver.maps.Event.addListener(markerList[i],"click",getClickHandler(i));
   naver.maps.Event.addListener(map,"click",getClicKMap(i));
 }
+
+const cluster1 = {
+  content: `<div class="cluster1"></div>`,
+}
+
+const cluster2 = {
+  content: `<div class="cluster2"></div>`
+}
+
+const cluster3 = {
+  content: `<div class="cluster3"></div>`
+}
+
+const markerClustering = new MarkerClustering({
+  minClusterSize: 2,
+  maxZoom: 12,
+  map: map,
+  markers: markerList,
+  disableClickZoom: false,
+  gridSize: 20,
+  icons: [cluster1, cluster2, cluster3],
+  indexGenerator: [2, 5, 10],   //cluster가 실행되는 마커 개수 범위 설정
+  stylingFunction: (clusterMarker, count) => {
+      $(clusterMarker.getElement()).find("div:first-child").text(count);
+  }
+  //클러스터 안에 몇개의 마커가 들어있는지 표시해줌.
+});
 });
 
 
